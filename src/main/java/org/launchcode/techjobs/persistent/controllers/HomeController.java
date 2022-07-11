@@ -69,6 +69,7 @@ public class HomeController {
         newJob.setSkills(skillObjs);
 
         jobRepository.save(newJob);
+        System.out.println(newJob.getEmployer().getName());
 
         return "redirect:";
     }
