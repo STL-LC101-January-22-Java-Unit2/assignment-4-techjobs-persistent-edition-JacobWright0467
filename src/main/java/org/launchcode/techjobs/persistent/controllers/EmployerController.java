@@ -9,7 +9,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.Optional;
 
 @Controller
@@ -22,7 +21,7 @@ public class EmployerController {
     @GetMapping("")
     public String index(Model model) {
         Iterable<Employer> employers = employerRepository.findAll();
-        model.addAttribute(employers);
+        model.addAttribute("employers", employers);
         return "employers/index";
     }
 

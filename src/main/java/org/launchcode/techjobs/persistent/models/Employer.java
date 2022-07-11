@@ -1,11 +1,23 @@
 package org.launchcode.techjobs.persistent.models;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Employer extends AbstractEntity {
+
+    @OneToMany
+    @JoinColumn(name = "employer_id")
+    private List<Job> jobs = new ArrayList<>();
+
+    @NotBlank
+    @Size(min=3, message="Location must be between 3 and 100 characters long")
+    public String location;
 
     public Employer() {
     }
@@ -14,10 +26,6 @@ public class Employer extends AbstractEntity {
         super();
         this.location = aLocation;
     }
-
-    @NotBlank
-    @Size(min=3, message="Location must be between 3 and 100 characters long")
-    public String location;
 
     public void setLocation(String location) {
         this.location = location;
@@ -28,8 +36,3 @@ public class Employer extends AbstractEntity {
     }
 }
 
-//JAKE section 2 Models part 2 last half says Employer needs
-//non arg constructor required for Hibernate to create object
-//may need to come back to this to see if that's something you
-//missed because i'm not sure what that means.  Maybe what I
-//put on line 10?
